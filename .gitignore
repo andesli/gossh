@@ -1,6 +1,7 @@
 #gitignore file#
 log/*
 ip.txt
+.gitignore
 
 #other rules 
 #!bin/gossh
