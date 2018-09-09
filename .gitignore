@@ -1,0 +1,7 @@
+#gitignore file#
+log/*
+ip.txt
+
+#other rules 
+#!bin/gossh
+#!bin/passtool
