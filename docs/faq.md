@@ -25,3 +25,8 @@ gossh优先从ip文件中获取密码，然后从命令行获取密码，最后�
 
 gossh使用go语言编写，理论上只要go语言支持的平台都能使用gossh，但是由于gossh使用的是ssh2协议，被gossh管理的机器必须支持ssh2协议，gossh最适合管理linux系统，windows系统没有经过测试。
 
+
+5.任何问题请联系 email.tata@qq.com
+
+为方便大家使用，提供了一个qq技术群:851647540， 可直接扫描下方二维码。
+![qq群](https://github.com/andesli/gossh/raw/master/docs/images/gossh_qq.png)

@@ -237,4 +237,8 @@ gossh核心目标就是解决机器交付后“最初一公里-机器初始化�
 
 [FAQ](https://github.com/andesli/gossh/blob/master/docs/faq.md)
 
-任何问题请联系 email.tata@qq.com
+任何问题可联系 <email.tata@qq.com>
+
+为方便大家使用，提供了一个qq技术群:851647540， 手机qq可以直接扫描下方二维码。
+![qq群](https://github.com/andesli/gossh/raw/master/docs/images/gossh_qq.png)
+
