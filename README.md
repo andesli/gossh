@@ -2,7 +2,7 @@
 
 ## 1.gossh是什么
 
-gossh是一个极简的ssh工具，使用go语言开发，被编译一个二进制程序，无任何依赖，真正开箱即用。用于远程管理linux(类unix)机器：包括远程执行命令和推拉文件,支持单机和批量并行执行模式。
+gossh是一个使用go语言开发的极度简洁的ssh工具，只有一个二进制程序，无任何依赖，真正开箱即用。用于远程管理linux(类unix)机器：包括远程执行命令和推拉文件,支持单机和批量模式。
 
 ## 2.gossh能干什么
 
@@ -239,8 +239,9 @@ gossh核心目标就是解决机器交付后“最初一公里-机器初始化�
 
 [FAQ](https://github.com/andesli/gossh/blob/master/docs/faq.md)
 
-任何问题可联系 <email.tata@qq.com>
+任何问题可联系 <email.tata@qq.com>, 感觉有用的话帮忙加个星。
 
 为方便大家使用，提供了一个qq技术群:851647540， 手机qq可以直接扫描下方二维码。
 ![qq群](https://github.com/andesli/gossh/raw/master/docs/images/gossh_qq.png)
+
 
