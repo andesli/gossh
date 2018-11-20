@@ -27,6 +27,7 @@ import (
 	"gossh/scp"
 	"gossh/tools"
 	"io"
+	"net"
 	"os"
 	"path"
 	"path/filepath"
@@ -441,6 +442,9 @@ func (server *Server) getSshClient() (client *ssh.Client, err error) {
 	sshConfig := &ssh.ClientConfig{
 		User: server.User,
 		Auth: authMethods,
+		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
+			return nil
+		},
 	}
 	//psw := []ssh.AuthMethod{ssh.Password(server.Psw)}
 	//Conf := ssh.ClientConfig{User: server.User, Auth: psw}
