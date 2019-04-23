@@ -10,12 +10,15 @@ workhome=$(cd $(dirname $0) && pwd)
 binpath=${workhome}/bin
 
 oss=(linux windows)
-arches=(amd64 386)
+arches=(amd64 386 arm64)
 target=(gossh passtool)
 
 for arch in ${arches[@]};do
 	for os in ${oss[@]};do
 		for t in ${target[@]};do
+			if [[ ${arch} == "arm64" && ${os} == "windows" ]];then
+					continue
+			fi
 			cmd="CGO_ENABLED=0 GOOS=${os} GOARCH=${arch} go build"
 			echo "${cmd} ${t}.go"
 			eval ${cmd} ${t}.go

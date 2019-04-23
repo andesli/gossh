@@ -154,23 +154,25 @@ func parseLine(s string, eflag bool) (Host, error) {
 	}
 
 	fields := strings.Split(line, "|")
-	ip := net.ParseIP(fields[0])
-	if ip == nil {
+	//ip := net.ParseIP(fields[0])
+	hname := strings.TrimSpace(fields[0])
+	_, err := net.LookupHost(hname)
+	if err != nil {
 		return host, errors.New("ill ip")
 	}
 	lens := len(fields)
 	switch lens {
 	case 1:
-		host.Ip = strings.TrimSpace(fields[0])
+		host.Ip = hname
 	case 2:
-		host.Ip = strings.TrimSpace(fields[0])
+		host.Ip = hname
 		host.Port = strings.TrimSpace(fields[1])
 	case 3:
-		host.Ip = strings.TrimSpace(fields[0])
+		host.Ip = hname
 		host.Port = strings.TrimSpace(fields[1])
 		host.User = strings.TrimSpace(fields[2])
 	case 4:
-		host.Ip = strings.TrimSpace(fields[0])
+		host.Ip = hname
 		host.Port = strings.TrimSpace(fields[1])
 		host.User = strings.TrimSpace(fields[2])
 		pass := strings.TrimSpace(fields[3])

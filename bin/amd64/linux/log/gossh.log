@@ -1,0 +1,6 @@
+2019/04/24 00:16:18.309 [I]  gossh -t=cmd  cmd=[uname]
+2019/04/24 00:16:18.310 [I]  [servers]=[192.168.56.2 localhost]
+2019/04/24 00:16:40.143 [I]  gossh -t=cmd  cmd=[uname]
+2019/04/24 00:16:40.143 [I]  [servers]=[192.168.56.2 localhost]
+2019/04/24 00:16:57.501 [I]  gossh -t=cmd  cmd=[uname]
+2019/04/24 00:16:57.529 [I]  [servers]=[192.168.56.2 localhost baidu.com]
