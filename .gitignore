@@ -2,6 +2,10 @@
 log/*
 ip.txt
 .gitignore
+gossh
+passtool
+
+#!bin/passtool
 
 #other rules 
 #!bin/gossh

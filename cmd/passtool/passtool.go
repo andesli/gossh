@@ -24,11 +24,9 @@ import (
 )
 
 var (
-	rzkey = enc.GetKey()
-
-	encry = flag.Bool("e", false, "指定密码明文生成密文")
-	decry = flag.Bool("d", false, "指定密码密文生成明文")
-	pkey  = flag.String("key", "", "aes加密密钥")
+	encry = flag.Bool("e", false, "encryption(加密)")
+	decry = flag.Bool("d", false, "decrypt(解密)")
+	pkey  = flag.String("k", "", "aes加密密钥")
 )
 
 func usage() {
@@ -37,6 +35,7 @@ func usage() {
 }
 
 func main() {
+
 	flag.Parse()
 
 	if *pkey != "" {
@@ -47,6 +46,8 @@ func main() {
 		usage()
 	}
 	opstr := flag.Arg(0)
+
+	rzkey := enc.GetKey()
 
 	if *encry {
 		text, err := fenc(opstr, rzkey)
