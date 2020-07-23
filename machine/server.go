@@ -1,4 +1,4 @@
-// Copyright 2018 gossh Author. All Rights Reserved.
+// Copyright 2018 github.com/andesli/gossh Author. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,12 +20,12 @@ import (
 	"errors"
 	"fmt"
 	"golang.org/x/crypto/ssh"
-	"gossh/auth"
-	_ "gossh/auth/db"
-	//_ "gossh/auth/web"
-	"gossh/logs"
-	"gossh/scp"
-	"gossh/tools"
+	"github.com/andesli/gossh/auth"
+	_ "github.com/andesli/gossh/auth/db"
+	//_ "github.com/andesli/gossh/auth/web"
+	"github.com/andesli/gossh/logs"
+	"github.com/andesli/gossh/scp"
+	"github.com/andesli/gossh/tools"
 	"io"
 	"net"
 	"os"

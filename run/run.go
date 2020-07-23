@@ -1,4 +1,4 @@
-// Copyright 2018 gossh Author. All Rights Reserved.
+// Copyright 2018 github.com/andesli/gossh Author. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,15 +18,15 @@ package run
 
 import (
 	"fmt"
-	"gossh/machine"
-	"gossh/output"
+	"github.com/andesli/gossh/machine"
+	"github.com/andesli/gossh/output"
 	//	"net"
 	//	"strings"
 	//"context"
 	"errors"
-	"gossh/config"
-	"gossh/logs"
-	//	"gossh/tools"
+	"github.com/andesli/gossh/config"
+	"github.com/andesli/gossh/logs"
+	//	"github.com/andesli/gossh/tools"
 	"path/filepath"
 	"sync"
 )

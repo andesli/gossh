@@ -1,4 +1,4 @@
-// Copyright 2018 gossh Author. All Rights Reserved.
+// Copyright 2018 github.com/andesli/gossh Author. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,20 +19,20 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gossh/enc"
-	"gossh/help"
-	"gossh/logs"
-	"gossh/machine"
-	"gossh/run"
-	"gossh/tools"
+	"github.com/andesli/gossh/enc"
+	"github.com/andesli/gossh/help"
+	"github.com/andesli/gossh/logs"
+	"github.com/andesli/gossh/machine"
+	"github.com/andesli/gossh/run"
+	"github.com/andesli/gossh/tools"
 	"path/filepath"
 	"strings"
 	"sync"
 )
 
-//gossh version
+//github.com/andesli/gossh version
 const (
-	AppVersion = "gossh 0.6"
+	AppVersion = "github.com/andesli/gossh 0.6"
 )
 
 var (
@@ -51,7 +51,7 @@ var (
 	//safe options
 	encFlag   = flag.Bool("e", false, "password is Encrypted")
 	force     = flag.Bool("f", false, "force to run even if it is not safe")
-	psafe     = flag.Bool("s", false, "if -s is setting, gossh will exit when error occurs")
+	psafe     = flag.Bool("s", false, "if -s is setting, github.com/andesli/gossh will exit when error occurs")
 	pkey      = flag.String("key", "", "aes key for password decrypt and encryption")
 	blackList = []string{"rm", "mkfs", "mkfs.ext3", "make.ext2", "make.ext4", "make2fs", "shutdown", "reboot", "init", "dd"}
 
@@ -59,9 +59,9 @@ var (
 	plogLevel = flag.String("l", "info", "log level (debug|info|warn|error")
 	plogPath  = flag.String("logpath", "./log/", "logfile path")
 	log       = logs.NewLogger()
-	logFile   = "gossh.log"
+	logFile   = "github.com/andesli/gossh.log"
 
-	pversion = flag.Bool("version", false, "gossh version")
+	pversion = flag.Bool("version", false, "github.com/andesli/gossh version")
 )
 
 //main
@@ -124,7 +124,7 @@ func main() {
 		}
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
-		log.Info("gossh -t=cmd  cmd=[%s]", cmd)
+		log.Info("github.com/andesli/gossh -t=cmd  cmd=[%s]", cmd)
 
 		if *host != "" {
 			log.Info("[servers]=%s", *host)
@@ -148,7 +148,7 @@ func main() {
 
 		src := flag.Arg(0)
 		dst := flag.Arg(1)
-		log.Info("gossh -t=push local-file=%s, remote-path=%s", src, dst)
+		log.Info("github.com/andesli/gossh -t=push local-file=%s, remote-path=%s", src, dst)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
 		if *host != "" {
@@ -173,7 +173,7 @@ func main() {
 		src := flag.Arg(1)
 		//远程文件
 		dst := flag.Arg(0)
-		log.Info("gossh -t=pull remote-file=%s  local-path=%s", dst, src)
+		log.Info("github.com/andesli/gossh -t=pull remote-file=%s  local-path=%s", dst, src)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
 		if *host != "" {

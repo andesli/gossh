@@ -38,7 +38,7 @@ func TestPushDir(t *testing.T) {
 		t.Fatal(err)
 	}
 	scp := NewScp(client)
-	srcDir := "/project/go/src/gossh/scp"
+	srcDir := "/project/go/src/github.com/andesli/gossh/scp"
 	dest := "/tmp/"
 	err = scp.PushDir(srcDir, dest)
 	if err != nil {

@@ -1,4 +1,4 @@
-// Copyright 2018 gossh Author. All Rights Reserved.
+// Copyright 2018 github.com/andesli/gossh Author. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gossh/enc"
+	"github.com/andesli/gossh/enc"
 	"os"
 )
 

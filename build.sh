@@ -19,9 +19,9 @@ for arch in ${arches[@]};do
 			if [[ ${arch} == "arm64" && ${os} == "windows" ]];then
 					continue
 			fi
-			cmd="CGO_ENABLED=0 GOOS=${os} GOARCH=${arch} go build"
-			echo "${cmd} ${t}.go"
-			eval ${cmd} ${t}.go
+			cmd="CGO_ENABLED=0 GOOS=${os} GOARCH=${arch} go build ${workhome}/cmd/${t}"
+			echo "${cmd}"
+			eval ${cmd}
 			
 			if [[ ! -d ${binpath}/${arch}/${os} ]];then
 					mkdir -p ${binpath}/${arch}/${os}
