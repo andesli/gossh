@@ -53,14 +53,14 @@ func NewUser(user, port, psw string, force, encflag bool) *CommonUser {
 	}
 
 }
-func SingleRun(host, cmd string, cu *CommonUser, force bool) {
-	server := machine.NewCmdServer(host, cu.port, cu.user, cu.psw, "cmd", cmd, force)
+func SingleRun(host, cmd string, cu *CommonUser, force bool, timeout int) {
+	server := machine.NewCmdServer(host, cu.port, cu.user, cu.psw, "cmd", cmd, force, timeout)
 	r := server.SRunCmd()
 	output.Print(r)
 }
 
 //func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine.Result, ipFile string, ccons chan struct{}) {
-func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine.Result, ipFile string, ccons chan struct{}, safe bool) {
+func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine.Result, ipFile string, ccons chan struct{}, safe bool, timeout int) {
 	hosts, err := parseIpfile(ipFile, cu)
 	if err != nil {
 		log.Error("Parse %s error, error=%s", ipFile, err)
@@ -79,7 +79,7 @@ func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine
 	if cap(ccons) == 1 {
 		log.Debug("串行执行")
 		for _, h := range hosts {
-			server := machine.NewCmdServer(h.Ip, h.Port, h.User, h.Psw, "cmd", cmd, cu.force)
+			server := machine.NewCmdServer(h.Ip, h.Port, h.User, h.Psw, "cmd", cmd, cu.force, timeout)
 			r := server.SRunCmd()
 			if r.Err != nil && safe {
 				log.Debug("%s执行出错", h.Ip)
@@ -95,7 +95,7 @@ func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine
 
 		for _, h := range hosts {
 			ccons <- struct{}{}
-			server := machine.NewCmdServer(h.Ip, h.Port, h.User, h.Psw, "cmd", cmd, cu.force)
+			server := machine.NewCmdServer(h.Ip, h.Port, h.User, h.Psw, "cmd", cmd, cu.force, timeout)
 			wt.Add(1)
 			go server.PRunCmd(crs)
 		}

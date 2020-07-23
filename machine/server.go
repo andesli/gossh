@@ -19,9 +19,9 @@ package machine
 import (
 	"errors"
 	"fmt"
-	"golang.org/x/crypto/ssh"
 	"github.com/andesli/gossh/auth"
 	_ "github.com/andesli/gossh/auth/db"
+	"golang.org/x/crypto/ssh"
 	//_ "github.com/andesli/gossh/auth/web"
 	"github.com/andesli/gossh/logs"
 	"github.com/andesli/gossh/scp"
@@ -33,6 +33,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 )
 
 var (
@@ -60,6 +61,7 @@ type Server struct {
 	FileName   string
 	RemotePath string
 	Force      bool
+	Timeout    int
 }
 
 type ScpConfig struct {
@@ -74,15 +76,16 @@ type Result struct {
 	Err    error
 }
 
-func NewCmdServer(ip, port, user, psw, action, cmd string, force bool) *Server {
+func NewCmdServer(ip, port, user, psw, action, cmd string, force bool, timeout int) *Server {
 	server := &Server{
-		Ip:     ip,
-		Port:   port,
-		User:   user,
-		Action: action,
-		Cmd:    cmd,
-		Psw:    psw,
-		Force:  force,
+		Ip:      ip,
+		Port:    port,
+		User:    user,
+		Action:  action,
+		Cmd:     cmd,
+		Psw:     psw,
+		Force:   force,
+		Timeout: timeout,
 	}
 	if psw == "" {
 		server.SetPsw()
@@ -445,6 +448,7 @@ func (server *Server) getSshClient() (client *ssh.Client, err error) {
 		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 			return nil
 		},
+		Timeout: (time.Duration(server.Timeout)) * time.Second,
 	}
 	//psw := []ssh.AuthMethod{ssh.Password(server.Psw)}
 	//Conf := ssh.ClientConfig{User: server.User, Auth: psw}

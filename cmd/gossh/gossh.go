@@ -32,7 +32,7 @@ import (
 
 //github.com/andesli/gossh version
 const (
-	AppVersion = "github.com/andesli/gossh 0.6"
+	AppVersion = "github.com/andesli/gossh 0.7"
 )
 
 var (
@@ -51,7 +51,7 @@ var (
 	//safe options
 	encFlag   = flag.Bool("e", false, "password is Encrypted")
 	force     = flag.Bool("f", false, "force to run even if it is not safe")
-	psafe     = flag.Bool("s", false, "if -s is setting, github.com/andesli/gossh will exit when error occurs")
+	psafe     = flag.Bool("s", false, "if -s is setting, gossh will exit when error occurs")
 	pkey      = flag.String("key", "", "aes key for password decrypt and encryption")
 	blackList = []string{"rm", "mkfs", "mkfs.ext3", "make.ext2", "make.ext4", "make2fs", "shutdown", "reboot", "init", "dd"}
 
@@ -61,7 +61,10 @@ var (
 	log       = logs.NewLogger()
 	logFile   = "github.com/andesli/gossh.log"
 
-	pversion = flag.Bool("version", false, "github.com/andesli/gossh version")
+	pversion = flag.Bool("version", false, "gossh version")
+
+	//Timeout
+	ptimeout = flag.Int("timeout", 10, "ssh timeout setting")
 )
 
 //main
@@ -128,13 +131,13 @@ func main() {
 
 		if *host != "" {
 			log.Info("[servers]=%s", *host)
-			run.SingleRun(*host, cmd, puser, *force)
+			run.SingleRun(*host, cmd, puser, *force, *ptimeout)
 
 		} else {
 			cr := make(chan machine.Result)
 			ccons := make(chan struct{}, *cons)
 			wg := &sync.WaitGroup{}
-			run.ServersRun(cmd, puser, wg, cr, *ipFile, ccons, *psafe)
+			run.ServersRun(cmd, puser, wg, cr, *ipFile, ccons, *psafe, *ptimeout)
 			wg.Wait()
 		}
 
