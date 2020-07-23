@@ -46,10 +46,11 @@ cd $GOPATH/src && git clone https://github.com/andesli/gossh.git
 cd gossh
 
 //gossh工具
-go build gossh.go
+go build ./cmd/gossh 
 
 //密码加解密工具
-go build passtool.go
+go build ./cmd/passtool
+
 
 //编译脚本编译amd64 386体系结构下windows和linux版本,放到./bin目录下，如果有其他体系结构需要使用也可以修改脚本执行编译。
 ./build.sh
