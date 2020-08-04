@@ -91,7 +91,7 @@ func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine
 		}
 	} else {
 		log.Debug("并行执行")
-		go output.PrintResults2(crs, ls, wt, ccons)
+		go output.PrintResults2(crs, ls, wt, ccons, timeout)
 
 		for _, h := range hosts {
 			ccons <- struct{}{}
@@ -132,7 +132,7 @@ func ServersPush(src, dst string, cu *CommonUser, ipFile string, wt *sync.WaitGr
 	fmt.Printf("[servers]=%v\n", ips)
 
 	ls := len(hosts)
-	go output.PrintResults2(crs, ls, wt, ccons)
+	go output.PrintResults2(crs, ls, wt, ccons, timeout)
 
 	for _, h := range hosts {
 		ccons <- struct{}{}
