@@ -94,7 +94,7 @@ func NewCmdServer(ip, port, user, psw, action, cmd string, force bool, timeout i
 	return server
 }
 
-func NewScpServer(ip, port, user, psw, action, file, rpath string, force bool) *Server {
+func NewScpServer(ip, port, user, psw, action, file, rpath string, force bool, timeout int) *Server {
 	rfile := path.Join(rpath, path.Base(file))
 	cmd := createShell(rfile)
 	server := &Server{
@@ -107,6 +107,7 @@ func NewScpServer(ip, port, user, psw, action, file, rpath string, force bool) *
 		RemotePath: rpath,
 		Cmd:        cmd,
 		Force:      force,
+		Timeout:    timeout,
 	}
 	if psw == "" {
 		server.SetPsw()

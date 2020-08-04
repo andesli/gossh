@@ -156,12 +156,12 @@ func main() {
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
 		if *host != "" {
 			log.Info("[servers]=%s", *host)
-			run.SinglePush(*host, src, dst, puser, *force)
+			run.SinglePush(*host, src, dst, puser, *force, *ptimeout)
 		} else {
 			cr := make(chan machine.Result, 20)
 			ccons := make(chan struct{}, *cons)
 			wg := &sync.WaitGroup{}
-			run.ServersPush(src, dst, puser, *ipFile, wg, ccons, cr)
+			run.ServersPush(src, dst, puser, *ipFile, wg, ccons, cr, *ptimeout)
 			wg.Wait()
 		}
 

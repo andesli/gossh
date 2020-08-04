@@ -22,17 +22,19 @@ import (
 
 func initServer() *Server {
 	s := &Server{
-		Ip:     "192.168.56.2",
+		Ip:     "127.0.0.1",
 		Port:   "22",
 		User:   "root",
 		Action: "cmd",
 		Cmd:    "uname",
-		Psw:    "",
+		// password
+		Psw: "hello@123",
 	}
 
 	return s
 }
 
+/*
 func TestSetPsw(t *testing.T) {
 	s := initServer()
 	s.SetPsw()
@@ -40,10 +42,11 @@ func TestSetPsw(t *testing.T) {
 		t.Error("get password fail")
 	}
 }
+*/
 
 func TestRunCmd(t *testing.T) {
 	s := initServer()
-	s.SetPsw()
+	//	s.SetPsw()
 
 	_, err := s.RunCmd()
 	if err != nil {

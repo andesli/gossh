@@ -102,8 +102,8 @@ func ServersRun(cmd string, cu *CommonUser, wt *sync.WaitGroup, crs chan machine
 	}
 }
 
-func SinglePush(ip, src, dst string, cu *CommonUser, f bool) {
-	server := machine.NewScpServer(ip, cu.port, cu.user, cu.psw, "scp", src, dst, f)
+func SinglePush(ip, src, dst string, cu *CommonUser, f bool, timeout int) {
+	server := machine.NewScpServer(ip, cu.port, cu.user, cu.psw, "scp", src, dst, f, timeout)
 	cmd := "push " + server.FileName + " to " + server.Ip + ":" + server.RemotePath
 
 	rs := machine.Result{
@@ -120,7 +120,7 @@ func SinglePush(ip, src, dst string, cu *CommonUser, f bool) {
 }
 
 //push file or dir to remote servers
-func ServersPush(src, dst string, cu *CommonUser, ipFile string, wt *sync.WaitGroup, ccons chan struct{}, crs chan machine.Result) {
+func ServersPush(src, dst string, cu *CommonUser, ipFile string, wt *sync.WaitGroup, ccons chan struct{}, crs chan machine.Result, timeout int) {
 	hosts, err := parseIpfile(ipFile, cu)
 	if err != nil {
 		log.Error("Parse %s error, error=%s", ipFile, err)
@@ -136,7 +136,7 @@ func ServersPush(src, dst string, cu *CommonUser, ipFile string, wt *sync.WaitGr
 
 	for _, h := range hosts {
 		ccons <- struct{}{}
-		server := machine.NewScpServer(h.Ip, h.Port, h.User, h.Psw, "scp", src, dst, cu.force)
+		server := machine.NewScpServer(h.Ip, h.Port, h.User, h.Psw, "scp", src, dst, cu.force, timeout)
 		wt.Add(1)
 		go server.PRunScp(crs)
 	}
