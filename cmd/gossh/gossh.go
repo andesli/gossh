@@ -59,7 +59,7 @@ var (
 	plogLevel = flag.String("l", "info", "log level (debug|info|warn|error")
 	plogPath  = flag.String("logpath", "./log/", "logfile path")
 	log       = logs.NewLogger()
-	logFile   = "github.com/andesli/gossh.log"
+	logFile   = "gossh.log"
 
 	pversion = flag.Bool("version", false, "gossh version")
 
