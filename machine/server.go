@@ -331,7 +331,7 @@ func (server *Server) PullScp() (err error) {
 	}
 
 	//检查本地是否有同名文件
-	fileName := filepath.Base(src)
+	fileName := filepath.Base(dst)
 	localFile := filepath.Join(dst, fileName)
 
 	flag := tools.FileExists(localFile)

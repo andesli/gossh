@@ -48,7 +48,7 @@ func NewScp(clientConn *ssh.Client) *Scp {
 	}
 }
 
-// Pull file from remote serter to local
+//Pull file from remote to local
 //targetFile 远端目标文件
 //srcpath 本地目录
 func (scp *Scp) PullFile(srcpath, targetFile string) error {

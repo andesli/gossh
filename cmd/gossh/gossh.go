@@ -32,7 +32,7 @@ import (
 
 //github.com/andesli/gossh version
 const (
-	AppVersion = "github.com/andesli/gossh 0.7"
+	AppVersion = "gossh 0.7"
 )
 
 var (
@@ -127,7 +127,7 @@ func main() {
 		}
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
-		log.Info("github.com/andesli/gossh -t=cmd  cmd=[%s]", cmd)
+		log.Info("gossh -t=cmd  cmd=[%s]", cmd)
 
 		if *host != "" {
 			log.Info("[servers]=%s", *host)
@@ -151,7 +151,7 @@ func main() {
 
 		src := flag.Arg(0)
 		dst := flag.Arg(1)
-		log.Info("github.com/andesli/gossh -t=push local-file=%s, remote-path=%s", src, dst)
+		log.Info("gossh -t=push local-file=%s, remote-path=%s", src, dst)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
 		if *host != "" {
@@ -176,7 +176,7 @@ func main() {
 		src := flag.Arg(1)
 		//远程文件
 		dst := flag.Arg(0)
-		log.Info("github.com/andesli/gossh -t=pull remote-file=%s  local-path=%s", dst, src)
+		log.Info("gossh -t=pull remote-file=%s  local-path=%s", dst, src)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
 		if *host != "" {
