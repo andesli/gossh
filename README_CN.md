@@ -135,6 +135,39 @@ Usage of gossh:
   -s    if -s is setting, gossh will exit when error occurs
 		如果-c=1，即并发度为1串行执行时，默认出错后会退出，使用-s标记不要退出，继续执行，在-c>1时，无论是否指定-s都不会出错退出。
         
+
+  -env  if -env,enable os environment variable in a string using ${var} syntax,such as ${USER}， also support for bash string replacement functions.
+            支持环境变量替换
+           Supported Functions
+           支持如下功能：
+
+                  ${var^}
+                  ${var^^}
+                  ${var,}
+                  ${var,,}
+                  ${var:position}
+                  ${var:position:length}
+                  ${var#substring}
+                  ${var##substring}
+                  ${var%substring}
+                  ${var%%substring}
+                  ${var/substring/replacement}
+                  ${var//substring/replacement}
+                  ${var/#substring/replacement}
+                  ${var/%substring/replacement}
+                  ${#var}
+                  ${var=default}
+                  ${var:=default}
+                  ${var:-default}
+
+            Unsupported Functions
+            不支持如下功能：
+
+                  ${var-default}
+                  ${var+default}
+                  ${var:?default}
+                  ${var:+default}
+ 
   -l string
         log level (debug|info|warn|error (default "info")
         日志级别
