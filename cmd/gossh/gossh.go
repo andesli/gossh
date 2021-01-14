@@ -19,15 +19,18 @@ package main
 import (
 	"flag"
 	"fmt"
+	"path/filepath"
+	"strings"
+	"sync"
+
+	"github.com/drone/envsubst"
+
 	"github.com/andesli/gossh/enc"
 	"github.com/andesli/gossh/help"
 	"github.com/andesli/gossh/logs"
 	"github.com/andesli/gossh/machine"
 	"github.com/andesli/gossh/run"
 	"github.com/andesli/gossh/tools"
-	"path/filepath"
-	"strings"
-	"sync"
 )
 
 //github.com/andesli/gossh version
@@ -64,8 +67,52 @@ var (
 	pversion = flag.Bool("version", false, "gossh version")
 
 	//Timeout
-	ptimeout = flag.Int("timeout", 10, "ssh timeout setting")
+	ptimeout   = flag.Int("timeout", 10, "ssh timeout setting")
+	penv = flag.Bool("env", false, "enable os environment variable in a string using ${var} syntax,such as ${USER} ")
 )
+
+// envsubst is a Go package for expanding variables in a string using ${var} syntax. Includes support for bash string replacement functions.
+//  Supported Functions
+//     ${var^}
+//     ${var^^}
+//     ${var,}
+//     ${var,,}
+//     ${var:position}
+//     ${var:position:length}
+//     ${var#substring}
+//     ${var##substring}
+//     ${var%substring}
+//     ${var%%substring}
+//     ${var/substring/replacement}
+//     ${var//substring/replacement}
+//     ${var/#substring/replacement}
+//     ${var/%substring/replacement}
+//     ${#var}
+//     ${var=default}
+//     ${var:=default}
+//     ${var:-default}
+
+// Unsupported Functions
+
+//     ${var-default}
+//     ${var+default}
+//     ${var:?default}
+//     ${var:+default}
+
+func evalEnv(text string) string {
+	if *penv == false {
+		return text
+	}
+
+	envsubst.EvalEnv(text)
+	line, err := envsubst.EvalEnv(text)
+	if err != nil {
+		log.Error("Error while envsubst: %v", err)
+	}
+
+	log.Info("%s %s", text, line)
+	return line
+}
 
 //main
 func main() {
@@ -117,7 +164,7 @@ func main() {
 			return
 		}
 
-		cmd := flag.Arg(0)
+		cmd := evalEnv(flag.Arg(0))
 
 		if flag := tools.CheckSafe(cmd, blackList); !flag && *force == false {
 			fmt.Printf("Dangerous command in %s", cmd)
@@ -149,8 +196,8 @@ func main() {
 			return
 		}
 
-		src := flag.Arg(0)
-		dst := flag.Arg(1)
+		src := evalEnv(flag.Arg(0))
+		dst := evalEnv(flag.Arg(1))
 		log.Info("gossh -t=push local-file=%s, remote-path=%s", src, dst)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)
@@ -173,9 +220,9 @@ func main() {
 		}
 
 		//本地目录
-		src := flag.Arg(1)
+		src := evalEnv(flag.Arg(1))
 		//远程文件
-		dst := flag.Arg(0)
+		dst := evalEnv(flag.Arg(0))
 		log.Info("gossh -t=pull remote-file=%s  local-path=%s", dst, src)
 
 		puser := run.NewUser(*user, *port, *psw, *force, *encFlag)

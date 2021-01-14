@@ -128,6 +128,37 @@ Usage of gossh:
   -f    force to run even if it is not safe
 
   -s    if -s is setting, gossh will exit when error occurs
+
+  -env  if -env,enable os environment variable in a string using ${var} syntax,such as ${USER} 
+           Includes support for bash string replacement functions.
+           Supported Functions
+
+                  ${var^}
+                  ${var^^}
+                  ${var,}
+                  ${var,,}
+                  ${var:position}
+                  ${var:position:length}
+                  ${var#substring}
+                  ${var##substring}
+                  ${var%substring}
+                  ${var%%substring}
+                  ${var/substring/replacement}
+                  ${var//substring/replacement}
+                  ${var/#substring/replacement}
+                  ${var/%substring/replacement}
+                  ${#var}
+                  ${var=default}
+                  ${var:=default}
+                  ${var:-default}
+
+            Unsupported Functions
+
+                  ${var-default}
+                  ${var+default}
+                  ${var:?default}
+                  ${var:+default}
+ 
         
   -l string
         log level (debug|info|warn|error (default "info")
