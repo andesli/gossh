@@ -19,13 +19,15 @@ package machine
 import (
 	"errors"
 	"fmt"
+
 	"github.com/andesli/gossh/auth"
 	_ "github.com/andesli/gossh/auth/db"
+
+	"github.com/andesli/gossh/log"
 	"golang.org/x/crypto/ssh"
+
 	//_ "github.com/andesli/gossh/auth/web"
-	"github.com/andesli/gossh/logs"
-	"github.com/andesli/gossh/scp"
-	"github.com/andesli/gossh/tools"
+
 	"io"
 	"net"
 	"os"
@@ -34,6 +36,9 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/andesli/gossh/scp"
+	"github.com/andesli/gossh/tools"
 )
 
 var (
@@ -42,7 +47,8 @@ var (
 
 	NO_PASSWORD = "GET PASSWORD ERROR\n"
 
-	log = logs.NewLogger()
+	// log = logs.NewLogger()
+
 )
 
 const (

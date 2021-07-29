@@ -29,7 +29,7 @@ var (
 func TestCheckSafe(t *testing.T) {
 	for _, cmd := range cmds {
 		if CheckSafe(cmd, blackList) {
-			t.Errorf("CheckSafe fail")
+			t.Error("CheckSafe fail")
 		}
 	}
 
@@ -38,16 +38,16 @@ func TestCheckSafe(t *testing.T) {
 func TestFileExists(t *testing.T) {
 	for _, f := range files {
 		if !FileExists(f) {
-			t.Errorf("FileExists fail")
+			t.Error("FileExists fail")
 		}
 	}
 	if FileExists("/xxxxx/xxx.txt") {
-		t.Errorf("FileExists fail")
+		t.Error("FileExists fail")
 	}
 }
 
 func TestPathExists(t *testing.T) {
 	if !PathExists("/home") {
-		t.Errorf("PathExists Fail")
+		t.Error("PathExists Fail")
 	}
 }

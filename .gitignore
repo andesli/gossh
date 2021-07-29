@@ -1,9 +1,10 @@
 #gitignore file#
-log/*
+log/*.log
 ip.txt
-.gitignore
+
 gossh
 passtool
+vendor/*
 
 #!bin/passtool
 

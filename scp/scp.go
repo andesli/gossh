@@ -3,7 +3,6 @@ package scp
 import (
 	"bufio"
 	"fmt"
-	"golang.org/x/crypto/ssh"
 	"io"
 	"io/ioutil"
 	"log"
@@ -12,6 +11,8 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"golang.org/x/crypto/ssh"
 )
 
 // the following code is a modified version of https://github.com/gnicod/goscplib

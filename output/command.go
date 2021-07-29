@@ -19,7 +19,10 @@ package output
 import (
 	//	"context"
 	"fmt"
+
+	"github.com/andesli/gossh/log"
 	"github.com/andesli/gossh/machine"
+
 	//	"strings"
 	"sync"
 	"time"
@@ -31,19 +34,20 @@ const (
 
 //new print result
 func Print(res machine.Result) {
-	fmt.Printf("ip=%s\n", res.Ip)
+	log.Info("ip=%s", res.Ip)
 	//index := strings.Index(cmd, ";")
 	//newcmd := cmd[index+1:]
 	//fmt.Printf("ip=%s|command=%s\n", ip, cmd)
-	fmt.Printf("command=%s\n", res.Cmd)
+	log.Info("command=%s", res.Cmd)
 	if res.Err != nil {
-		fmt.Printf("return=1\n")
-		fmt.Printf("%s\n", res.Err)
+
+		log.Error("return=1")
+		log.Error("%s", res.Err)
 	} else {
-		fmt.Printf("return=0\n")
-		fmt.Printf("%s\n", res.Result)
+		log.Info("return=0")
+		log.Info("%s", res.Result)
 	}
-	fmt.Println("----------------------------------------------------------")
+	log.Info("----------------------------------------------------------")
 }
 
 func PrintResults2(crs chan machine.Result, ls int, wt *sync.WaitGroup, ccons chan struct{}, timeout int) {

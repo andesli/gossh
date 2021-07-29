@@ -18,21 +18,25 @@ package run
 
 import (
 	"fmt"
+
+	"github.com/andesli/gossh/log"
 	"github.com/andesli/gossh/machine"
 	"github.com/andesli/gossh/output"
+
 	//	"net"
 	//	"strings"
 	//"context"
 	"errors"
+
 	"github.com/andesli/gossh/config"
-	"github.com/andesli/gossh/logs"
+
 	//	"github.com/andesli/gossh/tools"
 	"path/filepath"
 	"sync"
 )
 
 var (
-	log = logs.NewLogger()
+// log = logs.NewLogger()
 )
 
 type CommonUser struct {

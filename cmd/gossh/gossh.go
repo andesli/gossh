@@ -27,15 +27,15 @@ import (
 
 	"github.com/andesli/gossh/enc"
 	"github.com/andesli/gossh/help"
-	"github.com/andesli/gossh/logs"
 	"github.com/andesli/gossh/machine"
 	"github.com/andesli/gossh/run"
 	"github.com/andesli/gossh/tools"
+	"github.com/andesli/gossh/log"
 )
 
 //github.com/andesli/gossh version
 const (
-	AppVersion = "gossh 0.7"
+	AppVersion = "gossh 0.7.2"
 )
 
 var (
@@ -61,14 +61,14 @@ var (
 	//log options
 	plogLevel = flag.String("l", "info", "log level (debug|info|warn|error")
 	plogPath  = flag.String("logpath", "./log/", "logfile path")
-	log       = logs.NewLogger()
-	logFile   = "gossh.log"
+	// log       = logs.NewLogger()
+	logFile = "gossh.log"
 
 	pversion = flag.Bool("version", false, "gossh version")
 
 	//Timeout
-	ptimeout   = flag.Int("timeout", 10, "ssh timeout setting")
-	penv = flag.Bool("env", false, "enable os environment variable in a string using ${var} syntax,such as ${USER} ")
+	ptimeout = flag.Int("timeout", 10, "ssh timeout setting")
+	penv     = flag.Bool("env", false, "enable os environment variable in a string using ${var} syntax,such as ${USER} ")
 )
 
 // envsubst is a Go package for expanding variables in a string using ${var} syntax. Includes support for bash string replacement functions.
@@ -150,8 +150,8 @@ func main() {
 
 	//异步日志，需要最后刷新和关闭
 	defer func() {
-		log.Flush()
-		log.Close()
+		// log.Flush()
+		// log.Close()
 	}()
 
 	log.Debug("parse flag ok , init log setting ok.")
@@ -240,18 +240,6 @@ func main() {
 
 //setting log
 func initLog() error {
-	switch *plogLevel {
-	case "debug":
-		log.SetLevel(logs.LevelDebug)
-	case "error":
-		log.SetLevel(logs.LevelError)
-	case "info":
-		log.SetLevel(logs.LevelInfo)
-	case "warn":
-		log.SetLevel(logs.LevelWarn)
-	default:
-		log.SetLevel(logs.LevelInfo)
-	}
 
 	logpath := *plogPath
 	err := tools.MakePath(logpath)
@@ -266,11 +254,14 @@ func initLog() error {
 	//logs.BeeLogger.SetLogger: invalid character 'g' in string escape code
 	logstring = strings.Replace(logstring, `\`, `\\`, -1)
 
-	err = log.SetLogger("file", logstring)
-	if err != nil {
-		return err
-	}
+	// err = log.SetLogger("file", logstring)
+	log.InitLog(logname)
+	// if err != nil {
+	// 	return err
+	// }
 	//开启日志异步提升性能
-	log.Async()
+	// log.Async()
+
+	log.SetLevel(*plogLevel)
 	return nil
 }

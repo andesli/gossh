@@ -7,4 +7,5 @@ require (
 	github.com/drone/envsubst v1.0.2
 	github.com/go-sql-driver/mysql v1.5.0
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
+	github.com/sirupsen/logrus v1.8.1
 )
