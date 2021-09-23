@@ -124,7 +124,6 @@ func ParseIps(ipfile string, eflag bool) ([]Host, error) {
 			} else {
 				return hosts, nil
 			}
-			return hosts, err
 		}
 	Lable:
 		line := strings.TrimSpace(s)
@@ -139,7 +138,6 @@ func ParseIps(ipfile string, eflag bool) ([]Host, error) {
 		}
 		hosts = append(hosts, h)
 	}
-	return hosts, err
 }
 
 func parseLine(s string, eflag bool) (Host, error) {
